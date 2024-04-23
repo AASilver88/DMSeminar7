@@ -17,11 +17,10 @@ search_box2.submit()
 #Проверяем получили ли какой-нибудь результат
 assert "No results found." not in driver.page_source
 
-driver.current_url
 #Находим название, артикул и цену запчасти
-spare_part_titles = driver.find_elements(By.CLASS_NAME, 'item-title wide')
-spare_part_articles = driver.find_elements(By.CLASS_NAME, 'data-article')
-spare_part_prices = driver.find_elements(By.CLASS_NAME, 'data-price')
+spare_part_titles = driver.find_elements(By.CSS_SELECTOR, "span.item-title")
+spare_part_articles = driver.find_elements(By.CSS_SELECTOR, "span.data-article")
+spare_part_prices = driver.find_elements(By.CSS_SELECTOR, "span.data-price")
 
 sptitles = [element.text for element in spare_part_titles]
 sparticles = [element.text for element in spare_part_articles]
