@@ -16,3 +16,18 @@ search_box2 = driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div
 search_box2.submit()
 #Проверяем получили ли какой-нибудь результат
 assert "No results found." not in driver.page_source
+
+driver.current_url
+#Находим название, артикул и цену запчасти
+spare_part_titles = driver.find_elements(By.CLASS_NAME, 'item-title wide')
+spare_part_articles = driver.find_elements(By.CLASS_NAME, 'data-article')
+spare_part_prices = driver.find_elements(By.CLASS_NAME, 'data-price')
+
+sptitles = [element.text for element in spare_part_titles]
+sparticles = [element.text for element in spare_part_articles]
+spprices = [element.text for element in spare_part_prices]
+
+for i in range(len(sptitles)):
+    print("{} {} {}".format(sptitles[i], sparticles[i], spprices[i]))
+
+driver.quit()
