@@ -19,12 +19,12 @@ search_box2.submit()
 #Проверяем получили ли какой-нибудь результат
 assert "No results found." not in driver.page_source
 
-# Инициализация пустого списка для хранения цитат
+# Инициализация пустого списка для хранения запчастей
 parts = []
 while True:
     # Поиск всех цитат на странице с помощью xpath
     part_elements = driver.find_elements(By.XPATH, '//form[@class="ms2_form"]')
-    # Извлечение текста каждой цитаты
+    # Извлечение текста в тегах каждой запчасти
     for part_element in part_elements:
         spare_part_title = part_element.find_element(By.XPATH, './/span[@class="item-title wide"]').text
         spare_part_article = part_element.find_element(By.XPATH, './/span[@class="data-article"]').text
@@ -40,6 +40,7 @@ while True:
     # Ожидание загрузки страницы
     time.sleep(1)
 
+# Запись данных в файл CSV
 with open("spare_parts.csv", "w", newline="") as file:
     writer = csv.DictWriter(file, fieldnames=["spare_part_title", "spare_part_article", "spare_part_price"])
     writer.writeheader()
